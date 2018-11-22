@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>productosSV</servlet-name>
+        <servlet-class>controlador.productosSV</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>undmedidaSV</servlet-name>
+        <servlet-class>controlador.undmedidaSV</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>productosSV</servlet-name>
+        <url-pattern>/productosSV</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>undmedidaSV</servlet-name>
+        <url-pattern>/undmedidaSV</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
