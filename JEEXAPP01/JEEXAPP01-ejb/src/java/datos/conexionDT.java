@@ -7,10 +7,13 @@ public class conexionDT {
     Connection conConecta = null;
 
     public conexionDT() throws Exception{
-        strUsrbd="root";
-        strPasbd="passw0rd";
-        strUrlbd="jdbc:mysql://localhost:3306/bdcloud";;
+        //strUsrbd="root";
+        //strPasbd="passw0rd";
+        //strUrlbd="jdbc:mysql://localhost:3306/bdcloud";;
         //strUrlbd="jdbc:mysql://node24547-env-4095905.jelastic.cloudhosted.es/bdcloud";
+        strUsrbd="bdcloud";
+        strPasbd="5B9V5j5W5o07dary";
+        strUrlbd="jdbc:mysql://node24547-env-4095905.jelastic.cloudhosted.es/bdcloud";
         try
         {   //Carga el driver JDBC
             Class.forName("com.mysql.jdbc.Driver");
