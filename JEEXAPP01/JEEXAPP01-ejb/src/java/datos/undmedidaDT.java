@@ -17,9 +17,9 @@ public class undmedidaDT {
         try{
             PreparedStatement ps=cnnConexion.prepareStatement("insert into undmedida"
                     + "(codigo,descripcion) "
-                    + "values(((select nvl(max(codigo),0) as codigo from undmedida)+1),"
-                    + "?)");
-            ps.setString(1,prsnlNT.getDescripcion());
+                    + "values(?,?)");
+            ps.setInt(1,ultimoCodigo(cnnConexion)+1);
+            ps.setString(2,prsnlNT.getDescripcion());
             intRpt=ps.executeUpdate();
         }catch(Exception e){
             throw e;
@@ -86,4 +86,19 @@ public class undmedidaDT {
         }
         return lstTodos;
     }         
+
+    public int ultimoCodigo(Connection _cnnConexion) throws Exception{
+        int _codigo = 0;
+        try{
+            PreparedStatement ps=_cnnConexion.prepareStatement("select * from undmedida "
+                    + "order by codigo desc");
+            ResultSet rslListado = ps.executeQuery();
+            if(rslListado.next()){
+                _codigo = rslListado.getInt("codigo");
+            }
+        }catch(Exception e){
+            throw e;
+        }
+        return _codigo;
+    }    
 }

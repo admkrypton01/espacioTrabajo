@@ -16,14 +16,14 @@ public class productosDT {
         try{
             PreparedStatement ps=cnnConexion.prepareStatement("insert into productos"
                     + "(codigo,descripcion,codunidad,fechaingreso,estado,stock,precio) "
-                    + "values(((select nvl(max(codigo),0) as codigo from productos)+1),"
-                    + "?,?,?,?,?,?)");
-            ps.setString(1,prsnlNT.getDescripcion());
-            ps.setInt(2,prsnlNT.getCodunidad());
-            ps.setDate(3,java.sql.Date.valueOf(prsnlNT.getFechaingreso()));
-            ps.setString(4,prsnlNT.getEstado());
-            ps.setDouble(5,prsnlNT.getStock());
-            ps.setDouble(6,prsnlNT.getPrecio());
+                    + "values(?,?,?,?,?,?,?)");
+            ps.setInt(1,ultimoCodigo(cnnConexion)+1);
+            ps.setString(2,prsnlNT.getDescripcion());
+            ps.setInt(3,prsnlNT.getCodunidad());
+            ps.setDate(4,java.sql.Date.valueOf(prsnlNT.getFechaingreso()));
+            ps.setString(5,prsnlNT.getEstado());
+            ps.setDouble(6,prsnlNT.getStock());
+            ps.setDouble(7,prsnlNT.getPrecio());
             intRpt=ps.executeUpdate();
         }catch(Exception e){
             throw e;
@@ -102,5 +102,20 @@ public class productosDT {
             cnnDao.cerrarConexion();
         }
         return lstTodos;
+    }     
+
+    public int ultimoCodigo(Connection _cnnConexion) throws Exception{
+        int _codigo = 0;
+        try{
+            PreparedStatement ps=_cnnConexion.prepareStatement("select * from productos "
+                    + "order by codigo desc");
+            ResultSet rslListado = ps.executeQuery();
+            if(rslListado.next()){
+                _codigo = rslListado.getInt("codigo");
+            }
+        }catch(Exception e){
+            throw e;
+        }
+        return _codigo;
     }     
 }

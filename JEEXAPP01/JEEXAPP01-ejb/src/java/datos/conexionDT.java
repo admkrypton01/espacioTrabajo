@@ -7,12 +7,13 @@ public class conexionDT {
     Connection conConecta = null;
 
     public conexionDT() throws Exception{
-        strUsrbd="uap";
-        strPasbd="2018";
-        strUrlbd="jdbc:oracle:thin:@localhost:1521:db11g";
+        strUsrbd="root";
+        strPasbd="passw0rd";
+        strUrlbd="jdbc:mysql://localhost:3306/bdcloud";;
+        //strUrlbd="jdbc:mysql://node24547-env-4095905.jelastic.cloudhosted.es/bdcloud";
         try
         {   //Carga el driver JDBC
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            Class.forName("com.mysql.jdbc.Driver");
             //Obtiene la conexion;
             conConecta=DriverManager.getConnection(strUrlbd,strUsrbd,strPasbd);
             if (conConecta != null){
